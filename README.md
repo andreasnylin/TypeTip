@@ -11,5 +11,5 @@ TypeTip is a little bookmarklet that displays a tooltip with type information wh
 Code to copy
 
 ```
-(function(){tt=document.createElement('script');tt.src='https://cdn.rawgit.com/andreasnylin/TypeTip/a2bacdd483fc42aa6c7850965ee591d5cb47f69a/typetip.js';document.body.appendChild(tt);})();
+javascript:(function(){tt=document.createElement('script');tt.src='https://cdn.rawgit.com/andreasnylin/TypeTip/a2bacdd483fc42aa6c7850965ee591d5cb47f69a/typetip.js';document.body.appendChild(tt);})();
 ```
