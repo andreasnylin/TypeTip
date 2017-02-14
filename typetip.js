@@ -10,17 +10,44 @@ Created by Andreas Nylin | andreas.nylin@gmail.com | @andreasnylin | andreasnyli
     const b = doc.createElement('div');
     let t = null;
 
+		function getRenderedFontFamily(cs) {
+			const test = document.createElement('div');
+			test.style = 'position:absolute;top:0;opacity:0;';
+			test.innerText = 'ABCabcEFGefg@£$#¤%?+1234-_.,';
+			document.querySelector('body').appendChild(test);
+
+			// TODO: Handle default fonts for sans-serif, serif, etc
+
+			return (() => {
+				test.style.fontFamily = cs.fontFamily;
+				let families = cs.fontFamily.split(',').map((s) => s.trim()),
+					width = test.clientWidth,
+					height = test.clientHeight,
+					family;
+
+				while (families.length) {
+					family = families.shift()
+					test.style.fontFamily = families.join(',');
+					if (width !== test.clientWidth || height !== test.clientHeight) {
+						break;
+					}
+				}
+
+				return family;
+			})();
+		}
+
 		function pad(text, length, char = ' ') {
 			if(text.length >= length) { 
 				return text;
 			}
 
-			return new Array(length - 1).join(char) + text;
+			return new Array(length).join(char) + text;
 		}
 
     function rgb2hex(clr) {
     	const rgb = clr.match(/\d+/g);
-		return '#' + pad(Number(rgb[0]).toString(16), 2) + pad(Number(rgb[1]).toString(16), 2) + pad(Number(rgb[2]).toString(16), 2);
+			return '#' + pad(Number(rgb[0]).toString(16), 2, '0') + pad(Number(rgb[1]).toString(16), 2, '0') + pad(Number(rgb[2]).toString(16), 2, '0');
     }
 
     a.style = 'position:absolute;background:rgba(0,0,0,.9);color:white;padding:5px;font-family:monospace;font-size:11px;z-index:99999999;min-width:200px;min-height:150px;transition:all .25s;text-align:left;opacity:0;;pointer-events:none';
@@ -43,24 +70,25 @@ Created by Andreas Nylin | andreas.nylin@gmail.com | @andreasnylin | andreasnyli
 
 				const cs = getComputedStyle(e.target)
 				const cr = e.target.getClientRects()[0];
-
+				const renderedFont = getRenderedFontFamily(cs);
+				const family = cs.fontFamily.replace(renderedFont, '<i>' + renderedFont + '</i>');
 				let hex;
 
 				if(cs.color.startsWith('rgb(')) {
 					hex = rgb2hex(cs.color)
 				}
 
-				a.innerHTML= `Family: ${cs.fontFamily}<br>
-				Size: ${cs.fontSize}<br>
-				Weight: ${cs.fontWeight}<br>
-				Style: ${cs.fontStyle}<br>
-				Stretch: ${cs.fontStretch}<br>
-				Line height: ${cs.lineHeight}<br>
-  				Letter spacing: ${cs.letterSpacing}<br>
-  				Word spacing: ${cs.wordSpacing}<br>
-  				Text decoration: ${cs.textDecoration}<br>
-  				Text transform: ${cs.textTransform}<br>
-  				Color: ${cs.color} ${hex}`;
+				a.innerHTML= `<b>Family:</b> ${family}<br>
+				<b>Size:</b> ${cs.fontSize}<br>
+				<b>Weight:</b> ${cs.fontWeight}<br>
+				<b>Style:</b> ${cs.fontStyle}<br>
+				<b>Stretch:</b> ${cs.fontStretch}<br>
+				<b>Line height:</b> ${cs.lineHeight}<br>
+  				<b>Letter spacing:</b> ${cs.letterSpacing}<br>
+  				<b>Word spacing:</b> ${cs.wordSpacing}<br>
+  				<b>Text decoration:</b> ${cs.textDecoration}<br>
+  				<b>Text transform:</b> ${cs.textTransform}<br>
+  				<b>Color:</b> ${cs.color} ${hex}`;
 
   				const aWidth = a.offsetWidth;
   				const aHeight = a.offsetHeight;
