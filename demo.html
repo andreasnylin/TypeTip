@@ -2,21 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="TypeTip is a small bookmarklet to help inspect typography on web pages.">
   <title>TypeTip demo</title>
+  <style>
+  	.btn-link {
+  		display: inline-block;
+  		padding: .5em 1em;
+  		background: #333;
+  		color: #fff;
+  		border-radius: .25em;
+  		text-decoration: none;
+  		font-weight: bold;
+  	}
 
+  	.serif {
+  		font-family: Georgia, Times, serif;
+  	}
+  </style>
 </head>
 <body>
 
-<h1>TypeTip</h1>
+<h1><img src="typetip-logo.svg" alt="TypeTip"></h1>
 <p><i>Hover elements to display font info.</i></p>
 <p>TypeTip is a small bookmarklet I wrote to help me inspect typography when comparing webpages with design sketches.</p>
 <p><a href=&quot;https://github.com/andreasnylin/TypeTip&quot;>View the project on Github</a></p>
-<p>
+<p class="serif">
 Or drag the linkbutton to your bookarks bar to start using TypeTip on any website.
 </p>
-<a href=&quot;javascript:(function(){tt=document.createElement(&#39;script&#39;);tt.src=&#39;https://cdn.rawgit.com/andreasnylin/TypeTip/a2bacdd483fc42aa6c7850965ee591d5cb47f69a/typetip.js&#39;;document.body.appendChild(tt);})();&quot; class=&quot;btn-link&quot; title=&quot;Drag me to your bookmarks bar&quot;>TypeTip</a>
+<a href="javascript:(function(){tt=document.createElement('script');tt.src='https://cdn.rawgit.com/andreasnylin/TypeTip/a2bacdd483fc42aa6c7850965ee591d5cb47f69a/typetip.js';document.body.appendChild(tt);})();" class="btn-link" title="Drag me to your bookmarks bar">TypeTip</a>
 
 <script src="typetip.js"></script>
+
+<p><a href="http://andreasnylin.com">andreasnylin.com</a></p>
 
 </body>
 </html>         
