@@ -1,4 +1,4 @@
-# TypeTip
+![TypeTip](https://github.com/andreasnylin/TypeTip/blob/master/typetip-logo.png)
 
 TypeTip is a little bookmarklet that displays a tooltip with type information when HTML elements are hovered
 
